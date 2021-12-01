@@ -1,24 +1,32 @@
-import logo from './logo.svg';
 import './App.css';
-
+import React,{useState,useEffect} from 'react'
+import Create from './components/create/Create';
+import Read from './components/read/Read';
+import axios from 'axios';
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import Header from './components/header/Header';
+const baseURL = "https://pocemployeeapi.azurewebsites.net/";
 function App() {
+  const [empData, setEmpData] = useState([])
+  useEffect(() => {
+    axios
+      .get(baseURL + "api/Employee/List")
+      .then((res)=> setEmpData(res.data))
+  }, []);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    
+        <Router>
+          <Header/>
+          <div className="container">
+          <Routes>
+            <Route path='/' element={<Create baseURL={baseURL}empData = {empData}/>}/>
+            <Route path ='/read' element={<Read/>}/>
+          </Routes>
+          </div>
+        </Router>
+      
+      
+    
   );
 }
 
