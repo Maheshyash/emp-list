@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
 import {getEmpData,getParticulardata} from '../ApiCall/ApiServices'
+import logo from '../assets/images/loader.gif'
 const Read = () => {
     const [data, setData] = useState([])
     const [selectedData,setSelectedData] =useState()
+
     useEffect(() => {
         getEmpData().then(res=>setData(res))
     }, [])
@@ -31,25 +33,28 @@ const Read = () => {
             <th scope="col">Update</th>
           </tr>
         </thead>
-        <tbody>
-          {data.map((ele, index) => (
-            <tr key={index}>
-              <td>{index + 1}</td>
-              <td>{ele.EmpCode}</td>
-              <td>{ele.FirstName}</td>
-              <td>{ele.LastName}</td>
-              <td>{ele.Email}</td>
-              <td>{ele.IsManager.toString()}</td>
-              <td>{getManagerName(ele.ManagerCode)}</td>
-              <td>{ele.Timestamp}</td>
-              <td>
-                <button type="button" className="btn btn-success"onClick={()=>handleUpdate(ele.EmpCode)}>
-                  Update
-                </button>
-              </td>
-            </tr>
-          ))}
-        </tbody>
+        {data.length==0?
+        <div className='d-flex justify-content-center mt-5'><img src={logo} alt="logo" className='inline-block'/></div> :<tbody>
+        {data.map((ele, index) => (
+          <tr key={index}>
+            <td>{index + 1}</td>
+            <td>{ele.EmpCode}</td>
+            <td>{ele.FirstName}</td>
+            <td>{ele.LastName}</td>
+            <td>{ele.Email}</td>
+            <td>{ele.IsManager.toString()}</td>
+            <td>{getManagerName(ele.ManagerCode)}</td>
+            <td>{ele.Timestamp}</td>
+            <td>
+              <button type="button" className="btn btn-success"onClick={()=>handleUpdate(ele.EmpCode)}>
+                Update
+              </button>
+            </td>
+          </tr>
+        ))}
+      </tbody>
+    }
+        
       </table>
   );
 };
