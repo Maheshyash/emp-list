@@ -1,14 +1,17 @@
 import axios from "axios";
 const baseURL = "https://pocemployeeapi.azurewebsites.net/";
-
+const instance = axios.create({
+  baseURL: "https://pocemployeeapi.azurewebsites.net/",
+});
+export default instance;
 export const getEmpData = () => {
-  const data = axios.get(baseURL + "api/Employee/List").then((res) => res.data);
+  const data = instance.get("api/Employee/List").then((res) => res.data);
   console.log(data, "dataformapiservices");
   return data;
 };
 export const postEmpData = (data) => {
-  axios
-    .post(baseURL + "api/Employee/Add", data)
+  instance
+    .post("api/Employee/Add", data)
     .then(function (response) {
       console.log(response);
     })
@@ -17,9 +20,11 @@ export const postEmpData = (data) => {
     });
 };
 
-export const getParticulardata = (value) =>{
-    const data =axios.get(baseURL+'api/Employee/GetItem',{
-       params : {EmpCode:value}
-    }).then(res=> res.data)
-    return data;
-}
+export const getParticulardata = (value) => {
+  const data = instance
+    .get("api/Employee/GetItem", {
+      params: { EmpCode: value },
+    })
+    .then((res) => res.data);
+  return data;
+};
