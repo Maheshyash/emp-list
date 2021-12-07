@@ -1,12 +1,10 @@
 import axios from "axios";
-const baseURL = "https://pocemployeeapi.azurewebsites.net/";
 const instance = axios.create({
   baseURL: "https://pocemployeeapi.azurewebsites.net/",
 });
 export default instance;
 export const getEmpData = () => {
   const data = instance.get("api/Employee/List").then((res) => res.data);
-  console.log(data, "dataformapiservices");
   return data;
 };
 export const postEmpData = (data) => {

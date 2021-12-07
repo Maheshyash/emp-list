@@ -2,19 +2,19 @@ import React from "react";
 import { Link } from "react-router-dom";
 const Header = () => {
   return (
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-      <Link class="navbar-brand" to='/'>
+    <nav className="navbar navbar-expand-lg navbar-light bg-light">
+      <Link className="navbar-brand" to='/'>
         EMPList
       </Link>
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav mr-auto">
-          <li class="nav-item active">
-            <Link class="nav-link" to='/'>
+      <div className="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul className="navbar-nav mr-auto">
+          <li className="nav-item active">
+            <Link className="nav-link" to='/'>
               create 
             </Link>
           </li>
-          <li class="nav-item active">
-            <Link class="nav-link" to='/read'>
+          <li className="nav-item active">
+            <Link className="nav-link" to='/read'>
                 Read
             </Link>
           </li>

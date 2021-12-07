@@ -5,13 +5,12 @@ import Read from './components/read/Read';
 import axios from 'axios';
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Header from './components/header/Header';
+import { getEmpData } from './components/ApiCall/ApiServices';
 const baseURL = "https://pocemployeeapi.azurewebsites.net/";
 function App() {
   const [empData, setEmpData] = useState([])
   useEffect(() => {
-    axios
-      .get(baseURL + "api/Employee/List")
-      .then((res)=> setEmpData(res.data))
+      getEmpData().then(res=>setEmpData(res));
   }, []);
   return (
     
